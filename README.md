@@ -49,6 +49,11 @@ a `*.preview` URL and the custom domain never updates.
 
 ## Images
 
-The hero is the page's entire weight. `site/images/hero.jpg` is a recompressed 1800px-wide
-version of the original 3704×5556 / 1.5 MB source in the old Phoenix app. If you replace
-it, recompress — don't drop a raw camera JPEG in.
+`site/images/hero.jpg` is [Pexels photo 8947184](https://www.pexels.com/photo/a-person-holding-a-cellphone-on-white-background-8947184/)
+by kaboompics.com, resized to 1800px wide and recompressed to ~44 KB. The Pexels licence
+allows commercial use with no attribution required.
+
+If you replace it, recompress — don't drop a raw camera JPEG in — and re-check both hero
+scrims. The desktop gradient is heaviest on the left where the copy sits; below 640px a
+separate bottom-up gradient takes over, because the crop otherwise puts the subject behind
+the headline.
