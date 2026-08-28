@@ -61,8 +61,24 @@ can only use the token; wrangler refuses the OAuth flow without a TTY.
 ## Images
 
 `site/images/hero.jpg` is [Pexels photo 8947184](https://www.pexels.com/photo/a-person-holding-a-cellphone-on-white-background-8947184/)
-by kaboompics.com, resized to 1800px wide and recompressed to ~44 KB. The Pexels licence
-allows commercial use with no attribution required.
+by kaboompics.com (Pexels licence: commercial use, no attribution required), resized to
+1800px wide, with a Caremate journey screen composited into the phone's blank glass.
+
+The screen came from `caremate/mockup-journey.png` — a **design mockup**, not a capture of
+the shipping app. To redo it after the UI changes, crop the screen out of a new source and
+perspective-warp it onto the glass:
+
+```bash
+QUAD="0,0 1181,295  400,0 1469,291  400,866 1471,905  0,866 1183,909"
+magick screen.png \( +clone -alpha transparent -background none -fill white \
+  -draw "roundrectangle 0,0 399,865 30,30" \) -compose DstIn -composite round.png
+magick round.png -blur 0x0.5 -modulate 99,94,100 -alpha set -virtual-pixel transparent \
+  -define distort:viewport=1800x1200+0+0 -distort Perspective "$QUAD" warp.png
+magick photo.jpg warp.png -compose over -composite -quality 82 site/images/hero.jpg
+```
+
+The quad is the screen's four corners in the 1800×1200 photo, clockwise from top-left; the
+blur and `-modulate` keep the crisp screenshot from looking pasted onto a soft photograph.
 
 If you replace it, recompress — don't drop a raw camera JPEG in — and re-check both hero
 scrims. The desktop gradient is heaviest on the left where the copy sits; below 640px a
