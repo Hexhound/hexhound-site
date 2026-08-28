@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hexhound — privacy-first mobile applications</title>
+<meta name="description" content="Hexhound builds privacy-first mobile applications. Designed, engineered, and published in-house.">
+<link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+<meta name="theme-color" content="#132538">
+<meta property="og:title" content="Hexhound — privacy-first mobile applications">
+<meta property="og:description" content="We build privacy-first mobile applications. Designed, engineered, and published in-house.">
+<meta property="og:url" content="https://hexhound.dev/">
+<meta property="og:type" content="website">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+  body {
+    --accent: #C49A6C;
+    --accent-deep: #A87F52;
+    --ink: #132538;
+    --ink-soft: #4A5A6B;
+    --paper: #FFFFFF;
+    --paper-sunken: #F5F5F5;
+    --dark: #111827;
+    --dark-deep: #0B1220;
+    --dark-line: #374151;
+    --dark-ink: #D1D5DB;
+
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    background: rgba(255, 255, 255, .9);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px rgba(19, 37, 56, .08);
+  }
+  .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+  .brand img { width: 42px; height: auto; }
+  .brand span {
+    font-size: 1.4rem; font-weight: 800; letter-spacing: .04em; line-height: 1;
+  }
+  .brand em { font-style: normal; color: var(--accent); }
+  .nav__links { display: none; align-items: center; gap: 2rem; }
+  .nav__links a {
+    text-decoration: none; font-size: .875rem; font-weight: 500; color: var(--ink-soft);
+    transition: color .2s;
+  }
+  .nav__links a:hover { color: var(--accent); }
+  .button {
+    display: inline-block; padding: .6rem 1.4rem; border-radius: 999px;
+    background: var(--accent); color: #fff; text-decoration: none;
+    font-size: .875rem; font-weight: 600; white-space: nowrap;
+    transition: background .2s;
+  }
+  .button:hover { background: var(--accent-deep); }
+  @media (min-width: 768px) {
+    .nav { padding: 1.25rem 3rem; }
+    .nav__links { display: flex; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 1.5rem 6rem;
+    background-image:
+      linear-gradient(135deg, rgba(245, 245, 245, .92) 0%, rgba(225, 225, 225, .62) 100%),
+      url('/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .hero__inner { max-width: 56rem; }
+  .hero h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(3rem, 11vw, 6rem);
+    font-weight: 800; line-height: .95; letter-spacing: -.035em;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p {
+    max-width: 34rem; margin: 0 0 2.5rem;
+    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+    font-weight: 300; line-height: 1.55; color: var(--ink);
+  }
+  .hero__cta {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: 1.125rem; font-weight: 700; text-decoration: none;
+    transition: color .2s;
+  }
+  .hero__cta:hover { color: var(--accent); }
+  .hero__cta span { font-size: 1.5rem; transition: transform .2s; }
+  .hero__cta:hover span { transform: translateX(.25rem); }
+  @media (min-width: 768px) { .hero { padding: 8rem 3rem 6rem; } }
+
+  /* ---------- philosophy ---------- */
+  .philosophy {
+    padding: 8rem 1.5rem; text-align: center; background: var(--paper-sunken);
+  }
+  .philosophy blockquote {
+    max-width: 56rem; margin: 0 auto;
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    font-weight: 300; font-style: italic; line-height: 1.5; color: var(--ink);
+  }
+  .rule {
+    width: 5rem; height: 4px; margin: 3rem auto 1.5rem;
+    background: var(--accent); opacity: .8;
+  }
+  .eyebrow {
+    display: block;
+    font-size: .75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .2em; color: var(--accent);
+  }
+  @media (min-width: 768px) { .philosophy { padding: 8rem 3rem; } }
+
+  /* ---------- team ---------- */
+  .team { padding: 6rem 1.5rem; background: var(--dark); color: #fff; }
+  .team__inner { max-width: 72rem; margin: 0 auto; }
+  .team__head { text-align: center; margin-bottom: 4rem; }
+  .team__head .eyebrow { margin-bottom: 1rem; letter-spacing: .18em; }
+  .team__head h2 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.25rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.02em;
+  }
+  .team__head p {
+    max-width: 48rem; margin: 0 auto;
+    font-size: 1.25rem; color: var(--dark-ink);
+  }
+  .members {
+    display: grid; gap: 3rem;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .member { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .member__photo {
+    width: 8rem; height: 8rem; margin-bottom: 1rem;
+    border-radius: 50%; overflow: hidden;
+    border: 2px solid var(--dark-line); background: var(--dark-line);
+  }
+  .member__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .member h3 { margin: 0; font-size: 1.25rem; font-weight: 700; }
+  .member p { margin: .25rem 0 1rem; font-size: .875rem; font-weight: 500; color: var(--accent); }
+  .member__links { display: flex; gap: 1rem; }
+  .member__links a { color: #9CA3AF; transition: color .2s; }
+  .member__links a:hover { color: #fff; }
+  .member__links svg { width: 1.5rem; height: 1.5rem; display: block; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  @media (min-width: 768px) {
+    .team { padding: 6rem 3rem; }
+    .members { grid-template-columns: repeat(2, minmax(0, 18rem)); justify-content: center; }
+  }
+
+  /* ---------- footer ---------- */
+  .footer {
+    padding: 3rem 1.5rem; background: var(--dark-deep); color: #9CA3AF;
+    text-align: center; font-size: .875rem; line-height: 1.8;
+  }
+  .footer__legal { max-width: 44rem; margin: 0 auto 1rem; }
+  .footer__entity { color: #E5E7EB; font-weight: 600; letter-spacing: .01em; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .footer__copy { margin: 0; color: #6B7280; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#top">
+    <img src="/images/logo.svg" alt="" width="42" height="46">
+    <span>HEX<em>HOUND</em></span>
+  </a>
+  <div class="nav__links">
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+  </div>
+  <a class="button" href="mailto:admin@hexhound.dev">Contact Us</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero__inner">
+    <h1>Engineered for <br><em>Mobile.</em></h1>
+    <p>We build privacy-first mobile applications. Designed, engineered, and published in-house.</p>
+    <a class="hero__cta" href="#about">Meet the team <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="philosophy">
+    <blockquote>
+      &ldquo;Code should be a catalyst, not a constraint. We design mobile applications that
+      keep their data on the device and their promises to the person holding it.&rdquo;
+    </blockquote>
+    <div class="rule"></div>
+    <span class="eyebrow">The Hexhound Standard</span>
+  </section>
+
+  <section class="team" id="about">
+    <div class="team__inner">
+      <div class="team__head">
+        <span class="eyebrow">The Team</span>
+        <h2>About Us</h2>
+        <p>
+          Our team of veteran developers brings over 10 years of specialized experience
+          across Finance, Oil &amp; Gas, Real Estate, Healthcare, and Mobile sectors,
+          building world-class solutions for the USA and Brazil.
+        </p>
+      </div>
+
+      <div class="members">
+        <div class="member">
+          <div class="member__photo">
+            <img src="/images/members/eduardo.jpg" alt="Eduardo" width="256" height="256" loading="lazy">
+          </div>
+          <h3>Eduardo</h3>
+          <p>Founder &amp; Developer</p>
+          <div class="member__links">
+            <a href="https://github.com/sezaru" target="_blank" rel="noopener noreferrer">
+              <span class="sr-only">Eduardo on GitHub</span>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/eduardo-barreto-alexandre-10147735/" target="_blank" rel="noopener noreferrer">
+              <span class="sr-only">Eduardo on LinkedIn</span>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member__photo">
+            <img src="/images/members/jeferson.jpg" alt="Jeferson" width="256" height="256" loading="lazy">
+          </div>
+          <h3>Jeferson</h3>
+          <p>Founder &amp; Developer</p>
+          <div class="member__links">
+            <a href="https://github.com/drikanius" target="_blank" rel="noopener noreferrer">
+              <span class="sr-only">Jeferson on GitHub</span>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/jefersonvramos/" target="_blank" rel="noopener noreferrer">
+              <span class="sr-only">Jeferson on LinkedIn</span>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__legal">
+    Hexhound is a trade name of<br>
+    <span class="footer__entity">EDUARDO BARRETO ALEXANDRE DESENVOLVIMENTO DE SOFTWARE LTDA</span><br>
+    CNPJ 59.731.750/0001-86 &middot;
+    <a href="mailto:admin@hexhound.dev">admin@hexhound.dev</a>
+  </div>
+  <p class="footer__copy">&copy; 2026 Hexhound</p>
+</footer>
+
+</body>
+</html>

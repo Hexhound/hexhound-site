@@ -1,0 +1,3 @@
+# The browser probes /favicon.ico implicitly. 200 = rewrite (same URL), not a redirect
+# hop, so the SVG mark is served instead of a 404 in the network log.
+/favicon.ico  /images/logo.svg  200
