@@ -1,0 +1,17 @@
+# devenv / direnv
+.devenv/
+.devenv*
+devenv.local.nix
+.direnv/
+
+# secrets — CLOUDFLARE_API_TOKEN and friends live here
+.env
+
+# node
+node_modules/
+
+# wrangler
+.wrangler/
+
+# local preview scratch files
+site/_preview.html

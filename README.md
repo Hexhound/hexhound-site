@@ -14,6 +14,12 @@ Its main job is company verification: Google Play organization accounts need a r
 site the company demonstrably controls, and the footer carries the legal entity name and
 CNPJ that must match the D&B record.
 
+## Dev shell
+
+`direnv allow` (or `nix develop --accept-flake-config --no-pure-eval`) gets you node/npx,
+a pinned `wrangler`, and `imagemagick` for reprocessing the photos. Same devenv layout as
+the other Hexhound repos, minus the Elixir/Rust modules this site has no use for.
+
 ## Editing
 
 Open `site/index.html`. Everything is in that one file — the colour tokens live in the
@@ -32,12 +38,17 @@ directly with `file://` does not load the images.
 
 ```bash
 pushd site
-npx wrangler@latest pages deploy . --project-name=hexhound-site --branch=main
+wrangler pages deploy . --project-name=hexhound-site --branch=main
 popd
 ```
 
 `--branch=main` targets the project's **production** branch. Without it the deploy lands on
 a `*.preview` URL and the custom domain never updates.
+
+Authentication is either `wrangler login` (interactive, browser) or a
+`CLOUDFLARE_API_TOKEN` in `.env` — `.envrc` loads it via `dotenv`, and `.env` is gitignored.
+The token needs **Account → Cloudflare Pages → Edit**. Non-interactive shells (CI, agents)
+can only use the token; wrangler refuses the OAuth flow without a TTY.
 
 ## DNS
 
