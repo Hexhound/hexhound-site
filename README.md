@@ -40,12 +40,13 @@ directly with `file://` does not load the images.
 
 ```bash
 pushd site
-wrangler pages deploy . --project-name=hexhound-site --branch=main
+wrangler pages deploy . --project-name=hexhound-site --branch=master
 popd
 ```
 
-`--branch=main` targets the project's **production** branch. Without it the deploy lands on
-a `*.preview` URL and the custom domain never updates.
+`--branch=master` targets the project's **production** branch (`master` here, unlike
+caremate-share's `main`). Any other branch, or none, lands on a preview URL
+(`<branch>.hexhound-site.pages.dev`) and the custom domain never updates.
 
 Authentication is either `wrangler login` (interactive, browser) or a
 `CLOUDFLARE_API_TOKEN` in `.env` — `.envrc` loads it via `dotenv`, and `.env` is gitignored.
