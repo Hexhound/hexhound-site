@@ -6,6 +6,8 @@ The Hexhound company page. One static HTML file, no build step, no framework.
 site/                 the deployable directory (Cloudflare Pages project hexhound-site)
   index.html          the whole page, styles inline
   _redirects          /favicon.ico rewrite
+  app-ads.txt         the AdMob publisher line: ad networks look for it at the root of
+                      the developer website the Play listing names, which is this one
   images/             hero, logo, member photos
 docs/superpowers/specs/   design document
 ```
